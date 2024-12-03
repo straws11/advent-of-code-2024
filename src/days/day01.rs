@@ -2,9 +2,8 @@ use std::path::Path;
 
 use crate::utils;
 
-pub fn run() {
-    let day01_path = Path::new("./input/input_day01.txt");
-    let lines = match utils::read_file(day01_path) {
+pub fn run(path: &Path) {
+    let lines = match utils::read_file(&path) {
         Ok(lines) => lines,
         Err(msg) => {
             eprintln!("Error Occured: {msg}");

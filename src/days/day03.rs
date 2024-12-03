@@ -2,8 +2,8 @@ use std::path::Path;
 
 use crate::utils;
 
-pub fn run() {
-    let line = match utils::read_file(Path::new("./input/input_day03.txt")) {
+pub fn run(path: &Path) {
+    let line = match utils::read_file(path) {
         Ok(lines) => lines.concat(),
         Err(msg) => {
             eprintln!("Error Occured: {}", msg);

@@ -8,8 +8,8 @@ enum Safety {
     Safe,
 }
 
-pub fn run() {
-    let lines = match utils::read_file(Path::new("./input/input_day02.txt")) {
+pub fn run(path: &Path) {
+    let lines = match utils::read_file(path) {
         Ok(lines) => lines,
         Err(msg) => {
             eprintln!("Error Occured: {}", msg);
@@ -36,14 +36,11 @@ pub fn day2(input: Vec<String>, damping: bool) -> usize {
                 if !damping {
                     continue;
                 }
-                println!("Before: {:?}", rep);
                 for i in 0..rep.len() {
                     let mut rep_clone = rep.clone();
                     rep_clone.remove(i);
-                    println!("After: {:?}", rep_clone);
                     if let Safety::Safe = determine_safe(&rep_clone) {
                         count += 1;
-                        println!("Safe");
                         break;
                     }
                 }

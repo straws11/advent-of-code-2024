@@ -1,12 +1,12 @@
 mod days;
 mod utils;
 
-use std::env;
+use std::{env, path::Path};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() < 2 {
-        eprintln!("Usage: cargo run <day_number>");
+        eprintln!("Usage: cargo run <day_number> [<input_file_path>]");
         std::process::exit(1);
     }
 
@@ -15,10 +15,17 @@ fn main() {
         std::process::exit(1);
     });
 
+    let str_path = format!("./input/input_day{:02}.txt", day).to_string();
+    let file_path = if args.len() >= 3 {
+        Path::new(&args[2])
+    } else {
+        Path::new(&str_path)
+    };
+
     match day {
-        1 => days::day01::run(),
-        2 => days::day02::run(),
-        3 => days::day03::run(),
+        1 => days::day01::run(file_path),
+        2 => days::day02::run(file_path),
+        3 => days::day03::run(file_path),
         // 4 => days::day04::run(),
         _ => {
             eprintln!("Day {} not implemented yet!", day);
