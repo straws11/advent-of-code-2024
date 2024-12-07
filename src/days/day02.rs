@@ -4,7 +4,7 @@ use crate::utils;
 
 enum Safety {
     /// Idx to try and remove
-    Unsafe(Vec<usize>),
+    Unsafe,
     Safe,
 }
 
@@ -32,7 +32,7 @@ pub fn day2(input: Vec<String>, damping: bool) -> usize {
             .collect::<Vec<i32>>();
         match determine_safe(&rep) {
             Safety::Safe => count += 1,
-            Safety::Unsafe(try_indices) => {
+            Safety::Unsafe => {
                 if !damping {
                     continue;
                 }
@@ -63,17 +63,17 @@ pub fn day2(input: Vec<String>, damping: bool) -> usize {
 fn determine_safe(rep: &[i32]) -> Safety {
     // not inc or decreasing
     if rep[0] == rep[1] {
-        return Safety::Unsafe([0, 1].to_vec());
+        return Safety::Unsafe;
     }
     let increasing: bool = rep[1] > rep[0];
     for i in 1..rep.len() {
         let diff = rep[i] - rep[i - 1];
 
         if !(1..=3).contains(&diff.abs()) {
-            return Safety::Unsafe([i, i - 1].to_vec());
+            return Safety::Unsafe;
         }
         if (increasing && (diff < 0)) || (!increasing && (diff > 0)) {
-            return Safety::Unsafe([i, i - 1].to_vec());
+            return Safety::Unsafe;
         }
     }
     Safety::Safe
