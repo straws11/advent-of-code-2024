@@ -28,7 +28,10 @@ fn main() {
         3 => days::day03::run(file_path),
         4 => days::day04::run(file_path),
         5 => days::day05::run(file_path),
-        // 6 => days::day06::run(file_path),
+        6 => days::day06::run(file_path),
+        // 7 => days::day07::run(file_path),
+        // 8 => days::day08::run(file_path),
+        // 9 => days::day09::run(file_path),
         _ => {
             eprintln!("Day {} not implemented yet!", day);
             std::process::exit(1);
